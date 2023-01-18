@@ -101,9 +101,8 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: 'img/documentation.png',
-      metadata:{
-        description: 'Welcome to the docs of Fleek Network, a lightning fast and decentralized CDN built to supercharge web3.',
-      },      
+      metadata:[{
+        description: 'Welcome to the docs of Fleek Network, a lightning fast and decentralized CDN built to supercharge web3.'}],      
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
