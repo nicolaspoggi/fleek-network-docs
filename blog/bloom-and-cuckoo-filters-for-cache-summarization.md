@@ -2,7 +2,7 @@
 title: Bloom Filters and Cuckoo Filters for Cache Summarization
 description: Summary of our experiment informing whether or not we should replace our implementation of Counting Bloom filters with Cuckoo filters.
 slug: bloom-and-cuckoo-filters-for-cache-summarization
-image: ./assets/bloom-cuckoo/bloom.png?202301181528
+image: ./assets/bloom-cuckoo/bloom.png
 authors:
   name: Matthias Wright
   title: Software Engineer

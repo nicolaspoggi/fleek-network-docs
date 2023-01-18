@@ -46,7 +46,7 @@ const copyright = `Copyright © ${new Date().getFullYear()} Fleek`;
 const config = {
   title: 'Fleek Network',
   tagline: '',
-  url: 'https://docs.fleek.network',
+  url: 'https://test-ym4s.onrender.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
