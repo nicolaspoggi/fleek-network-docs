@@ -100,7 +100,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: {'https://storageapi.fleek.co/27a60cdd-37d3-480c-ae88-3ad4ca886b13-bucket/imgs/documentation.png'
+      image: {'img/documentation.png',
     },
       metadata:{
         description: 'Welcome to the docs of Fleek Network, a lightning fast and decentralized CDN built to supercharge web3.',
