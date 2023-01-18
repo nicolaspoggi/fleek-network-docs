@@ -44,9 +44,9 @@ const copyright = `Copyright © ${new Date().getFullYear()} Fleek`;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Docs - Fleek Network',
+  title: 'Fleek Network Docs',
   tagline: 'Welcome to the docs of Fleek Network, a lightning fast and decentralized CDN built to supercharge web3.',
-  url: 'https://test-ym4s.onrender.com',
+  url: 'https://docs.fleek.network',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
