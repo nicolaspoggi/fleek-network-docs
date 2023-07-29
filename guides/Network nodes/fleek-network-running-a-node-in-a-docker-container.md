@@ -4,6 +4,7 @@ draft: false
 hide_title: true
 title: Running a node in a Docker container
 slug: fleek-network-running-a-node-in-a-docker-container
+image: ./assets/fleek-network-docker-setup-overview.png?202301111625
 date: 2022-12-05T23:00:00Z
 canonical: ''
 description: A guide on how to run Fleek Network's node in a docker container
@@ -22,6 +23,7 @@ tags:
 import CheckoutCommitWarning from '../partials/_checkout-commit-warning.mdx';
 import Author from '@site/src/components/Author';
 import YoutubePlayer from '@site/src/components/YoutubePlayer';
+import GitCloneOptions from '../partials/_git-clone-options.mdx';
 
 ![Fleek Network: Running a node in a Docker container](./assets/fleek-network-docker-setup-overview.png?202301111625)
 
@@ -49,21 +51,23 @@ To follow the guide, you will need the following:
 
 For the one's interested in running the node as quickly as possible, there are a few options, among those we pick two you might find handy:
 
+- Install a Network Node in a Linux Server e.g., Ubuntu or Debian latest by using our "Get Fleek Network", an assisted installer to help onboard as quickly as possible by simply executing `curl https://get.fleek.network | bash`. Learn more about the assisted installer [here](./fleek-network-how-to-install-a-node-easily-with-the-assisted-installer.md)
+
 - A Docker compose Stack, which is an opinionated stack that provides a reverse proxy service for the Node (Proxied internal `4069` to external ports `80` and `443`), a service to enable HTTPS on your server, services for monitoring and analytics, etc. You can run a stack quickly by following the instructions in [run the container from the recommended stack](#run-the-container-from-the-recommended-stack).
 
-- Building a Docker image requires some effort and some of our users might find it easier to pull our nightly image for quick access to Ursa, which does not require them to build from source. For that reason, we provide you with a quick demonstration of how to pull the image and run the Docker container quickly! Check the [run the container from the official nightly image](#run-the-container-from-the-official-nightly-image)
+- Building a Docker image requires some effort and some of our users might find it easier to pull our latest image for quick access to Ursa, which does not require them to build from source. For that reason, we provide you with a quick demonstration of how to pull the image and run the Docker container quickly! Check the [run the container from the official latest image](#run-the-container-from-the-official-latest-image)
 
-At some point in time you will have to look at the how things work and figure out what abstractions did wrong. For some advanced users that are used to it is not a big deal, but for everyone else that might cause quite a lot of hassle! Therefore, challenge yourself to learn the basics instead of executing commands you are yet to understand, this guide is your friend!
+At some point in time, you will have to look at how things work and figure out what abstractions did wrong. For some advanced users that are used to it is not a big deal, but for everyone else that might cause quite a lot of hassle! Therefore, challenge yourself to learn the basics instead of executing commands you are yet to understand, this guide is your friend!
 
 ## Quick Video
 
 A walkthrough video is provided as a quick reference for the users, we try to keep it simple and would suggest the text guide version to get more detailed information. 
 
-The video content is stored in our Fleek Network [playlist](https://www.youtube.com/watch?v=uAFIDu3UBvw&list=PL3v9ZaTBrN9GEQ2NmS5xc6YH0E2df5VTn) in the Fleek XYZ [Youtube channel](https://www.youtube.com/@fleekxyz).
+The video content is stored in our Fleek Network [playlist](https://www.youtube.com/watch?v=uAFIDu3UBvw&list=PL3v9ZaTBrN9GEQ2NmS5xc6YH0E2df5VTn) on the Fleek XYZ [Youtube channel](https://www.youtube.com/@fleekxyz).
 
 <YoutubePlayer
   title="Running a node in a Docker container"
-  source="https://www.youtube.com/embed/uAFIDu3UBvw"
+  videoId="uAFIDu3UBvw"
 />
 
 How do you find the video content? Help us improve by sending feedback in our Discord channel [here](https://discord.gg/fleekxyz).
@@ -86,9 +90,7 @@ In the example, for this guide, we have 8 GB spare memory and 20 GB spare disk s
 
 Start by cloning the repository located at [https://github.com/fleek-network/ursa](https://github.com/fleek-network/ursa "https://github.com/fleek-network/ursa").
 
-```sh
-git clone git@github.com:fleek-network/ursa.git
-```
+<GitCloneOptions />
 
 The command will copy the repository files to your local machine, by default into a directory by the name of the repository `ursa`.
 
@@ -116,7 +118,7 @@ If you list (`ls`) the files in the directory, it should be similar to:
 
 The simplest way to run docker is to visit the [https://www.docker.com/](https://www.docker.com/), download and install Docker Desktop.
 
-💡 Some users might prefer to look into the Docker daemon (dockerd), in that case, check the [docs](https://docs.docker.com), as we're trying to keep it simple here!
+💡 Some users might prefer to look into the Docker daemon (dockerd), in that case, check the [docs](https://docs.docker.com), as we're trying to keep it simple here! If you are going to install and run the Docker daemon (e.g., Linux Ubuntu server) remember to enable BuildKit (required by Docker build), check out reference [here](../../reference/Docker/buildkit-required-by-docker-build).
 
 Once Docker desktop is installed, you should start or open the application in your operating system! 
 
@@ -125,18 +127,19 @@ Also, you'll be able to run it via the CLI, as such:
 ```sh
 docker -v
 ```
+
 ```
-Docker version 20.10.6, build 370c289
+Docker version 23.0.0, build e92dd87c32
 ```
 
-Let's do the same for `docker-compose`
-
-```sh
-docker-compose -v
-```
+Let's do the same for `docker compose`
 
 ```sh
-docker-compose version 1.29.1, build c34c88b2
+docker compose -v
+```
+
+```sh
+Docker version 23.0.0, build e92dd87c32
 ```
 
 💡 Versions might differ a bit from the time of writing.
@@ -258,6 +261,10 @@ When ready, run the Docker build command:
 docker build -t ursa -f ./Dockerfile .
 ```
 
+If you are running the Docker daemon (not the Desktop version), BuildKit needs to be enabled.
+
+💩 BuildKit is required by Docker Build if you are running the docker daemon (desktop users have it enabled by default), read our reference [BuildKit required by Docker build](../../reference/Docker/buildkit-required-by-docker-build) to learn more about how to enable it.
+
 The build process takes awhile and you have to wait for completion. 
 
 🤖 The output should be similar to:
@@ -286,21 +293,21 @@ Following up, we'll learn how to run the Docker container that includes our `urs
 
 📢 We've been referencing the Dockerfile to a particular commit hash in our repository, to secure the pointer to it, but you are free to check any commit message, including the latest version of our main branch! This is explained in our guide to help you update the Ursa CLI source and binary [here](#fleek-network-how-to-get-the-latest-updates-for-ursa-cli-from-the-source-repository).
 
-### Run the container from the official nightly image
+### Run the container from the official latest image
 
 <!-- 
-Building a Docker image requires some effort and some of our users might find easier to pull our nightly image for quick access to Ursa, which does not require them to build from source.
+Building a Docker image requires some effort and some of our users might find easier to pull our latest image for quick access to Ursa, which does not require them to build from source.
 
 For that reason, we provide you a quick demonstration on how to pull the image and run the Docker container quickly! If you need more detailed information, then you'll be happier to follow the [run the Docker container](#run-the-docker-container). -->
 
-The Fleek Network Ursa image is built nightly, and some of our users might find handy to pull it instead of building it for quick access to a running node!
+The Fleek Network Ursa image is built latest, and some of our users might find handy to pull it instead of building it for quick access to a running node!
 
-> The official [fleek-network/ursa:nightly](https://github.com/fleek-network/ursa/pkgs/container/ursa) image is currently hosted in Github's container registry and updated every night, you can `docker pull` the image and run it locally. Beware that the version is built at a particular time of the day, so if you are looking for a custom image then you're better off learning how to build one yourself. The extended guide provides you all the information you need, but we also have a guide on how to update images that you may be interested in reading [here](fleek-network-packing-content-addressed-data)
+> The official [fleek-network/ursa:latest](https://github.com/fleek-network/ursa/pkgs/container/ursa) image is currently hosted in Github's container registry and updated every night, you can `docker pull` the image and run it locally. Beware that the version is built at a particular time of the day, so if you are looking for a custom image then you're better off learning how to build one yourself. The extended guide provides you all the information you need, but we also have a guide on how to update images that you may be interested in reading [here](fleek-network-packing-content-addressed-data)
 
 Firstly, start by running the `docker pull`, as follows:
 
 ```sh
-docker pull ghcr.io/fleek-network/ursa:nightly
+docker pull ghcr.io/fleek-network/ursa:latest
 ```
 
 ⚠️ Important: The Github container registry is private, you need a Github account and private token to login via the CLI to be able to pull, find the instructions [here](https://ghcr.io/).
@@ -308,10 +315,10 @@ docker pull ghcr.io/fleek-network/ursa:nightly
 Once the Docker image is downloaded completely, you can run a container based on the image:
 
 ```sh
-docker run -p 4069:4069 -p 6009:6009 -v $HOME/.ursa/:/root/.ursa/:rw --name ursa-cli -it ghcr.io/fleek-network/ursa:nightly
+docker run -p 4069:4069 -p 6009:6009 -v $HOME/.ursa/:/root/.ursa/:rw --name ursa-cli -it ghcr.io/fleek-network/ursa:latest
 ```
 
-Notice that the command arguments we pass are for the flag's `-p` for port numbers, `-v` to bind mount a location in your host to a container path (useful to persist your ursa configuration files, e.g. keystore), `--name` to make it easier to identify, `-it` to make it interactive (e.g. presents output to the terminal), and the image name we pulled earlier (ghcr.io/fleek-network/ursa:nightly), if you hadn't pulled and not found, docker would pull it for you.
+Notice that the command arguments we pass are for the flag's `-p` for port numbers, `-v` to bind mount a location in your host to a container path (useful to persist your ursa configuration files, e.g. keystore), `--name` to make it easier to identify, `-it` to make it interactive (e.g. presents output to the terminal), and the image name we pulled earlier (ghcr.io/fleek-network/ursa:latest), if you hadn't pulled and not found, docker would pull it for you.
 
 You can then do a quick healthcheck as described [here](#ursa-healthcheck).
 
@@ -372,21 +379,7 @@ If all goes well, the output should be similar to:
 Or, you might find familiar,
 
 ```sh
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:17 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:22 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:27 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:32 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:37 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:42 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:47 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:52 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:08:57 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:09:02 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:09:07 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:09:12 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:09:17 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:09:22 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
-nginx_1          | 172.19.0.3 - - [06/Jan/2023:19:09:27 +0000] "GET /stub_status HTTP/1.1" 200 100 "-" "Go-http-client/1.1" "-"
+
 ```
 
 A few points to notice are the listener port number and hostname 👀. As described in the [Run the Docker container](#run-the-docker-container), the container listener port number is exposed to your host's port number.
@@ -539,6 +532,16 @@ SUBCOMMANDS:
 
 Executing the bash shell in the container is not mandatory and what we shared here is to demonstrate how to interact with the `ursa` process for the users that don't have it on their local machines and/or are interested in checking subcommands, learning, following tutorials, etc in the same way someone who have it installed in their operating system would.
 
+## Firewall tampering
+
+Docker tampers with the firewall rules to some extent and that may cause some headaches if you are not aware of this.
+
+By default, Docker will manipulate the `iptables`, so if you are using `ufw`, you might find that docker overrules it, that is Docker overrides UFW rules.
+
+The `ufw` cli will fail to represent the actual state of `iptables`.
+
+Check our [reference](../../reference/Docker/disable-docker-iptables-tampering) or find more about this subject in the official [Docker iptables](https://docs.docker.com/network/iptables/).
+
 ## Run the container from the recommended stack
 
 Stack is a way to describe a list of services (applications), we'll have running in our network and Docker Compose is a tool for defining and running multi-container Docker applications (services).
@@ -549,9 +552,9 @@ Also, by using Docker compose it'll be easier to persist the configuration files
 
 ### Running a stack with Docker compose
 
-We have defined a Stack 🕸 that can be useful for running and monitoring; At time of writing, this is declared in a docker-compose file located [here](https://github.com/fleek-network/ursa/blob/cfbbe6208dc6a33d28b43c6e6820ab76c2905353/infra/ursa/docker-compose.yml).
+We have defined a Stack 🕸 that can be useful for running and monitoring; At the time of writing, this is declared in a docker compose file located [here](https://github.com/fleek-network/ursa/blob/cfbbe6208dc6a33d28b43c6e6820ab76c2905353/infra/ursa/docker-compose.yml).
 
-There you'll find specified all the configuration options, such as the ones we've discussed in the previous topics about the host, port bindings, bind mount, etc. You don't have to constantly verify if specified all the correct options when running the Docker containers. Plus, we have these setup for you [grafana](https://grafana.com/), [prometheus](https://prometheus.io/docs/introduction/overview/), [certbot](https://certbot.eff.org/) and [nginx](https://www.nginx.com/). 
+There you'll find specified all the configuration options, such as the ones we've discussed in the previous topics about the host, port bindings, bind mount, etc. You don't have to constantly verify if specified all the correct options when running the Docker containers. Plus, we have these setup for you [grafana](https://grafana.com/), [prometheus](https://prometheus.io/docs/introduction/overview/), [certbot](https://certbot.eff.org/) and the ursa-proxy.
 
 Also, the docker compose file can be customized to your preference, Docker will detect any changes recreating the container if and when necessary.
 
@@ -567,44 +570,30 @@ make compose-build
 
 ```sh
 certbot uses an image, skipping
-nginx uses an image, skipping
-nginxexporter uses an image, skipping
 prometheus uses an image, skipping
 grafana uses an image, skipping
 ```
 
 💡 The `ursa` Docker image should be built every time you want to pull and use an update, learn how by following the guide [here](#fleek-network-how-to-get-the-latest-updates-for-ursa-cli-from-the-source-repository).
 
-In the project root, execute the docker-compose command by providing the `docker-compose.yml` configuration file and the subcommand up.
+In the project root, execute the docker compose command by providing the `docker-compose.yml` configuration file and the subcommand up.
+
+💩 If you are running the Docker daemon (not the Desktop version), BuildKit needs to be enabled, (desktop users have it enabled by default). Read our reference [BuildKit required by Docker build](../../reference/Docker/buildkit-required-by-docker-build) to learn more about how to enable it!
 
 ```sh
-docker-compose -f <DOCKER-COMPOSE-FILEPATH> <up | down>
+docker compose -f <DOCKER-COMPOSE-FILEPATH> <up | down>
 ```
 
-For our use-case, here's how it'll look like:
+For our use case, here's how it'll look like:
 
 ```sh
-docker-compose -f docker/full-node/docker-compose.yml up
+docker compose -f docker/full-node/docker-compose.yml up
 ```
 
-Where for stopping, you have option `down`:
+Where for stopping, you have the option `down`:
 
 ```sh
-docker-compose -f docker/full-node/docker-compose.yml down
-```
-
-Also, we provide the following utility commands for your convenience.
-
-A command to execute the docker compose up:
-
-```sh
-make compose-up
-```
-
-Also, to execute the docker compose down:
-
-```sh
-make compose-down
+docker compose -f docker/full-node/docker-compose.yml down
 ```
 
 Here, we have an opinionated stack that you can use as a base for your system, or as a reference, for your research and learning. This means you aren't obligated to use Grafana or Prometheus. Ursa works without any dependency!
@@ -620,91 +609,7 @@ If you'd like to use some of the points available in the guide, such as to [exec
     ...
 ```
 
-At time of writing, you'll find that the output presents errors. The setup we have is based on our staging server use-case, which can be used as an example for yours.
-
-```sh
-nginx_1          | 2023/01/06 13:38:44 [emerg] 10#10: open() "/etc/letsencrypt/options-ssl-nginx.conf" failed (2: No such file or directory) in /etc/nginx/conf.d/app.conf:52
-nginxexporter_1  | time="2023-01-06T13:48:07Z" level=error msg="Error scraping nginx: Error scraping nginx: Get http://nginx:80/stub_status: dial tcp: lookup nginx on 127.0.0.11:53: no such host" source="nginx_exporter.go:171"
-```
-
-To mitigate this issue, you'll have to run a script from the directory `docker/full-node` of the Ursa project.
-
-Start by changing the directory to:
-
-```sh
-cd ./docker/full-node
-```
-
-The command you'll be running needs to be prefixed by a list of custom domain names
-
-```sh
-DOMAINS="<YOUR-CUSTOM-DOMAIN-NAME-1> <YOUR-CUSTOM-DOMAIN-NAME-2>" ./init-letsencrypt.sh
-```
-
-Here's a practical example,
-
-```sh
-DOMAINS="my-fleek-network-node.dev www.my-fleek-network-node.dev" ./init-letsencrypt.sh
-```
-
-If you haven't set up the domain correctly, you'd get
-
-```sh
-Certbot failed to authenticate some domains (authenticator: webroot). The Certificate Authority reported these problems:
-  Domain: my-fleek-network-node.dev
-  Type:   unauthorized
-  Detail: 2001:4860:4802:32::15: Invalid response from https://www.foobar.dev/.well-known/acme-challenge/3UrSvBmgSNsymLKA20wGKJfxQq_utTKlsTLxltTGNQ4: 403
-
-Hint: The Certificate Authority failed to download the temporary challenge files created by Certbot. Ensure that the listed domains serve their content from the provided --webroot-path/-w and that files created there can be downloaded from the internet.
-```
-
- 💡 We'll provide a guide with instructions about how to set up the custom domains.
-
-### Disabling SSL for testing
-
-⚠️ A secure connection is mandatory, the following instructions are available for testing purposes only!
-
-As many of you might not have a custom domain and are just looking around to see what Fleek Network is about, a way around would be to disable SSL for testing, which means that the communication is none secure.
-
-Open and edit the file `docker/full-node/data/nginx/app.conf` and make the content the following:
-
-```sh
-proxy_cache_path /cache keys_zone=nodecache:100m levels=1:2 inactive=31536000s max_size=10g use_temp_path=off;
-
-server {
-    listen 80;
-    listen [::]:80;
-    server_name node.ursa.earth www.node.ursa.earth;
-
-    location /stub_status {
-      stub_status;
-    }
-
-    proxy_redirect          off;
-    client_max_body_size    10m;
-    client_body_buffer_size 128k;
-    proxy_connect_timeout   90;
-    proxy_send_timeout      90;
-    proxy_read_timeout      90;
-    proxy_buffers           32 128k;
-
-    location / {
-      add_header content-type  application/vnd.ipld.raw;
-      add_header content-type  application/vnd.ipld.car;
-      add_header content-type  application/octet-stream;
-      add_header cache-control public,max-age=31536000,immutable;
-
-      proxy_cache nodecache;
-      proxy_cache_valid 200 31536000s;
-      add_header X-Proxy-Cache $upstream_cache_status;
-      proxy_cache_methods GET HEAD POST;
-      proxy_cache_key "$request_uri|$request_body";
-      client_max_body_size 1G;
-
-      proxy_pass http://ursa:4069;
-    }
-}
-```
+Want to secure your node? We have a brief guide on [Securing a Node with SSL/TLS](fleek-network-securing-a-node-with-ssl-tls).
 
 ## Conclusion
 

@@ -44,8 +44,8 @@ const copyright = `Copyright © ${new Date().getFullYear()} Fleek`;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Fleek Network',
-  tagline: '',
+  title: 'Fleek Network Docs',
+  tagline: 'Welcome to the docs of Fleek Network, a lightning fast and decentralized CDN built to supercharge web3.',
   url: 'https://docs.fleek.network',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -76,6 +76,8 @@ const config = {
           routeBasePath: '/docs',
           breadcrumbs: true,
           sidebarPath: require.resolve('./sidebars.js'),
+          sidebarCollapsed: false,
+          sidebarCollapsible: false,
         },
         blog: {
           path: 'blog',
@@ -100,6 +102,9 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      image: 'img/documentation.png',
+      metadata:[{
+        description: 'Welcome to the docs of Fleek Network, a lightning fast and decentralized CDN built to supercharge web3.'}],      
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
@@ -173,14 +178,15 @@ const config = {
       },
       algolia: {
         // The application ID provided by Algolia
-        appId: '1RFAB49JUD',
+        appId: 'ZLPPXSKTFE',
         // Public API key
-        apiKey: '76d5e1152fb478c8a97adf44e3cbe424',
-        indexName: 'fleekNetworkDocs',
+        apiKey: '33ed5b78ac12317e4243d3f44874cbc8',
+        indexName: 'fleek',
         // Optional: see doc section below
         contextualSearch: true,
         // Optional: path for search page that enabled by default (`false` to disable it)
         searchPagePath: 'search',
+        schedule: 'every 1 day at 6:00 pm',
       },
     }),
     plugins: [
@@ -193,6 +199,8 @@ const config = {
           routeBasePath: '/guides',
           // `undefined` to auto-generate
           sidebarPath: undefined,
+          sidebarCollapsed: false,
+          sidebarCollapsible: false,
           ...commonDocsOptions,
         }),
       ],

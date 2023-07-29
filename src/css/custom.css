@@ -158,6 +158,11 @@ div[class*="docItemContainer"] {
 .menu .menu__list {
   padding-right: 2rem;
 }
+
+nav > .menu__list {
+  padding-bottom: 4rem;
+}
+
 .menu .menu__list a::first-letter {
   text-transform: capitalize;
 }
@@ -250,6 +255,14 @@ article h1,
   max-width: 1440px;
   padding: 0;
 }
+/* 
+.col article.itemprop .markdown:not(#post-content) p img {
+  display: none;
+}  */
+
+.col article[itemprop="blogPost"] .markdown:not(#post-content) p img {
+  display: none;
+} 
 
 .markdown li a,
 .markdown p a {
@@ -267,11 +280,6 @@ article h1,
 .table-of-contents li a:hover {
   text-decoration: underline;
 }
-/* 
-ul.table-of-contents > li:first-child a.toc-highlight {
-  font-weight: bold;
-  font-size: 1rem;
-} */
 
 .table-of-contents:before {
   content: "Content";
@@ -333,8 +341,13 @@ blockquote:before {
   color: var(--ifm-color-primary-darker);
   font-weight: bold;
 }
+.author_card a {
+  flex-shrink: 0;
+}
 .author_card a img {
   transition: transform 0.3s, opacity 0.3s;
+  width: 60px;
+  height: 60px;
 }
 .author_card a img:hover {
   opacity: 0.9;
@@ -361,9 +374,12 @@ blockquote:before {
   line-height: 1.4;
 }
 .author_card > div {
-  display: flex;
+  /* display: flex;
+  gap: 1rem; */
+  display: grid;
+  grid-template-columns: auto auto;
   gap: 1rem;
-  height: 120px;
+  height: auto;
   position: relative;
   border: none;
   padding: 20px;
@@ -395,4 +411,14 @@ blockquote:before {
 .youtube-player iframe { 
   width: 100%;
   aspect-ratio: 16 / 9;
+}
+
+@media (min-width: 768px) {
+  .author_card > div {
+    height: 120px;
+  }
+  .author_card a img {
+    width: 80px;
+    height: 80px;
+  }
 }

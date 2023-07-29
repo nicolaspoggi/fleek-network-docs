@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - develop
 
   workflow_dispatch:
 
@@ -14,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PAT: ${{ secrets.PAT }}
-      ALGOLIA_APP_ID: 1RFAB49JUD
-      ALGOLIA_API_KEY: 76d5e1152fb478c8a97adf44e3cbe424
+      ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+      ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
 
     steps:
       - uses: actions/checkout@v3
@@ -38,9 +37,11 @@ jobs:
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
 
-      - name: Algolia docsearch indexer
-        uses: darrenjennings/algolia-docsearch-action@master
-        with:
-          algolia_application_id: ${{env.ALGOLIA_APP_ID}}
-          algolia_api_key: ${{env.ALGOLIA_API_KEY}}
-          file: config.docsearch.json
+      # TODO: Method not allowed with this API key (not be available for docsearch os free)
+      # TODO: Read the README #crawler for more details
+      # - name: Algolia docsearch indexer
+      #   uses: darrenjennings/algolia-docsearch-action@master
+      #   with:
+      #     algolia_application_id: ${{env.ALGOLIA_APP_ID}}
+      #     algolia_api_key: ${{env.ALGOLIA_API_KEY}}
+      #     file: config.docsearch.json

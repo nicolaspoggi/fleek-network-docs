@@ -29,6 +29,12 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
+### 🕸 Crawler
+
+Crawls are handled by the [Algolia [Crawler](https://www.algolia.com/products/search-and-discovery/crawler/) and are scheduled to run once a week by default. You can then trigger new crawls yourself and monitor them directly from the Crawler interface, which also offers a live editor where you can maintain your config.
+
+For this reason, crawling on CI deployment is disabled and can be enabled if moved from docsearch open-source license to a paid account.
+
 ### 🚀 Deployment
 
 The documentation site is the static output result of the build command (as directory `build`).
@@ -46,6 +52,12 @@ USE_SSH=true GIT_USER=<Your github username> yarn deploy
 💡 The command requires you to have Git authenticated via ssh.
 
 ### 🕸 Web Crawl
+
+⚠️ The `crawl:docker` will not work for now as we moved to the open source version of Algolia called Docsearch and the Crawler has to be triggered manually through their dashboard or awaited for the scheduled job. If preferred to use the `crawl:docker` in the CI, a paid subscription is required.
+
+To trigger manually read [here](https://docsearch.algolia.com/docs/manage-your-crawls/#trigger-a-new-crawl)
+
+#### CLI version, requires a paid subscription
 
 The web crawler or spider is used to search and automatically index website content. The process can run periodically by docsearch but if you much prefer you can run it manually.
 

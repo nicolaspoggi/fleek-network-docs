@@ -4,6 +4,7 @@ draft: false
 hide_title: true
 title: 'Fleek Network: Managing the key store'
 slug: fleek-network-managing-the-key-store
+image: ./assets/fleek-network-managing-the-keystore.png?202301021625
 date: 2023-01-02T23:00:00Z
 canonical: ''
 description: The following will guide you through some of the fundamentals to help understand how to manage the key store at the very basics, and help you persist the key store identity, in any supported system you’re migrating to.
@@ -25,6 +26,7 @@ import Author from '@site/src/components/Author';
 ![](./assets/fleek-network-managing-the-keystore.png?202301021625)
 
 ## Introduction
+
 Fleek Network incentivizes participation by rewarding its node providers. A node is identifiable by an identity, which the reward mechanism uses to identify the node to reward it! 
 
 We'll use the term identity to describe the key store declared in the configuration file, in our case a [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail). Remember to keep this file secret 🙏!

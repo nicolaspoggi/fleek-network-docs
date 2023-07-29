@@ -7,7 +7,7 @@ slug: stop-the-fleek-network-node-process
 date: 2023-01-02T23:00:00Z
 canonical: ''
 description: Reference about stopping a Fleek network node process
-category: Tutorial
+category: Reference
 tags:
 - Reference
 - Fleek Network
@@ -18,13 +18,19 @@ tags:
 Stop the Fleek Network node for Docker
 
 ```sh
-docker-compose -f docker/full-node/docker-compose.yml down
+docker compose -f docker/full-node/docker-compose.yml down
 ```
 
 Stop the Fleek Network node by sending a terminate signal (SIGTERM) to the `ursa` process
 
 ```sh
 pkill ursa
+```
+
+Kill all `ursa` processes
+
+```sh
+killall ursa
 ```
 
 Stop the Fleek Network node in Ubuntu Linux by finding what the process id (PID) of `ursa` cli is by finding which process is listening on the port 6009 or 4069.

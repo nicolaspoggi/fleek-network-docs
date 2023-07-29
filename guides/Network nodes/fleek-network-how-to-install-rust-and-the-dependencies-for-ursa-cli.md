@@ -4,6 +4,7 @@ draft: false
 hide_title: true
 title: How to install Rust and the dependencies for Ursa CLI
 slug: fleek-network-how-to-install-rust-and-the-dependencies-for-ursa-cli
+image: ./assets/fleek-network-dependencies-for-ursa-cli.png?202212071243
 date: 2022-12-06T23:00:00Z
 canonical: ''
 description: A Rust installation walkthrough to help compile and run Ursa CLI
@@ -21,6 +22,7 @@ tags:
 -->
 import CheckoutCommitWarning from '../partials/_checkout-commit-warning.mdx';
 import Author from '@site/src/components/Author';
+import GitCloneOptions from '../partials/_git-clone-options.mdx';
 
 ![](./assets/fleek-network-dependencies-for-ursa-cli.png?202212071243)
 
@@ -233,17 +235,7 @@ Generally, users report issues with commands not being found. 🧐 To avoid frus
 
 If you haven't already 🙄, clone the Fleek Network's Ursa repository to your machine.
 
-Either, run the command:
-
-```sh
-git clone https://github.com/fleek-network/ursa.git
-```
-
-Or, for user's with configured **ssh**:
-
-```sh
-git clone git@github.com:fleek-network/ursa.git
-```
+<GitCloneOptions />
 
 💡 Optionally, you can pass a directory name at the end of the commands (as the last argument), otherwise defaults to the repository name and for our case the name is `ursa`. Note that you don't have to use `<` or `>` when naming, it's just illustrative.
 
@@ -272,6 +264,13 @@ If you list (`ls`) the files in the directory, it should be similar to:
 ```
 
 At this point, you should be able to run the `install` command successfully.
+
+🙄 If you already had Rust installed, or the project before, and skipped instructions directly here, there might be case where you get errors. So, make sure to clear your work directory:
+
+```sh
+cargo clean
+cargo update
+```
 
 Start the `install` process by running the command:
 
