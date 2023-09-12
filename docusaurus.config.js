@@ -9,17 +9,12 @@ const commonDocsOptions = {
   showLastUpdateAuthor: false,
   showLastUpdateTime: true,
   editUrl:
-    'https://github.com/fleek-network/fleek-network-docs/edit/main/',
+    'https://github.com/fleek-xyz/',
 };
 
 const commonNavbarItems = [{
   to: 'docs',
   label: 'Documentation',
-  position: 'left',
-},
-{
-  to: 'blog',
-  label: 'Engineering',
   position: 'left',
 },
 {
@@ -29,30 +24,37 @@ const commonNavbarItems = [{
   activeBasePath: 'guides',
 },
 {
-  to: 'reference',
-  label: 'Reference',
+  to: 'templates',
+  label: 'Templates',
   position: 'left',
-  activeBasePath: 'reference',
+  activeBasePath: 'templates',
 },
 {
-  href: 'https://github.com/fleek-network/',
+  to: 'changelog',
+  label: 'Changelog',
+  position: 'left',
+  activeBasePath: 'changelog',
+},
+{
+  href: 'https://github.com/fleekxyz',
   label: 'Github',
   position: 'left',
   target: '_blank',
 }];
 
 const commonDiscord = 'https://discord.gg/fleekxyz';
-const commonTwitter = 'https://twitter.com/fleek_net';
-const commonHome = 'https://fleek.network';
-const commonCompanyUrl = 'https://fleek.network/';
+const commonTwitter = 'https://twitter.com/fleekxyz';
+const commonHome = 'https://fleek.xyz';
+const commonCompanyUrl = 'https://fleek.xyz';
+const commonSupport = 'https://support.fleek.xyz';
 
 const copyright = `Copyright © ${new Date().getFullYear()} Fleek`;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Fleek Network Docs | Decentralized Edge Platform',
-  tagline: 'Welcome to the docs of Fleek Network, a decentralized edge platform for building web3 edge services.',
-  url: 'https://docs.fleek.network',
+  title: 'Fleek Docs | Build Lightning Fast Web3 Apps',
+  tagline: 'Welcome to the docs of Fleek. Seamlessly build Web3 apps and services that are edge-optimized for performance.',
+  url: 'https://docs.fleek.xyz',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -60,8 +62,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'fleek-network', // Usually your GitHub org/user name.
-  projectName: 'fleek-network-docs', // Usually your repo name.
+  organizationName: 'fleekxyz', // Usually your GitHub org/user name.
+  projectName: 'fleek-xyz-docs', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -82,23 +84,14 @@ const config = {
           routeBasePath: '/docs',
           breadcrumbs: true,
           sidebarPath: require.resolve('./sidebars.js'),
-          sidebarCollapsed: false,
-          sidebarCollapsible: false,
-        },
-        blog: {
-          path: 'blog',
-          blogSidebarCount: 'ALL',
-          blogSidebarTitle: 'All Blog Posts',
-          feedOptions: {
-            type: 'all',
-            copyright,
-          },
+          sidebarCollapsed: true,
+          sidebarCollapsible: true,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
         gtag: {
-          trackingID: 'G-GPHQQEZ1SP',
+          trackingID: 'GTM-PC422SF',
           anonymizeIP: true,
         },
       }),
@@ -110,12 +103,13 @@ const config = {
     ({
       image: 'img/documentation.png',
       metadata:[{
-        description: 'Welcome to the docs of Fleek Network, a decentralized edge platform for building edge services.'}],      
+        description: 'Welcome to the docs of Fleek. Seamlessly build Web3 apps and services that are edge-optimized for performance.'}],      
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
         respectPrefersColorScheme: false,
       },
+
       navbar: {
         logo: {
           alt: 'Fleek',
@@ -156,35 +150,35 @@ const config = {
               },
               {
                 label: 'Contact us',
-                href: commonDiscord,
+                href: commonSupport,
               },
             ],
           },
         ],
         // copyright: `Copyright © ${new Date().getFullYear()} Fleek. All rights reserved.`,
         logo: {
-          alt: 'Fleek Network',
+          alt: 'Fleek',
           src: 'img/logo+named.svg?202301101154',
-          href: 'https://fleek.network',
-          width: 160
+          href: 'https://fleek.xyz',
+          width: 100
         },
       },
       prism: {
         theme: darkCodeTheme,
         darkTheme: darkCodeTheme,
       },
-      algolia: {
-        // The application ID provided by Algolia
-        appId: 'ZLPPXSKTFE',
-        // Public API key
-        apiKey: '33ed5b78ac12317e4243d3f44874cbc8',
-        indexName: 'fleek',
-        // Optional: see doc section below
-        contextualSearch: true,
-        // Optional: path for search page that enabled by default (`false` to disable it)
-        searchPagePath: 'search',
-        schedule: 'every 1 day at 6:00 pm',
-      },
+      // algolia: {
+      //   // The application ID provided by Algolia
+      //   appId: 'ZLPPXSKTFE',
+      //   // Public API key
+      //   apiKey: '33ed5b78ac12317e4243d3f44874cbc8',
+      //   indexName: 'fleek',
+      //   // Optional: see doc section below
+      //   contextualSearch: true,
+      //   // Optional: path for search page that enabled by default (`false` to disable it)
+      //   searchPagePath: 'search',
+      //   schedule: 'every 1 day at 6:00 pm',
+      // },
     }),
     plugins: [
       [
@@ -205,15 +199,31 @@ const config = {
         'content-docs',
         /** @type {import('@docusaurus/plugin-content-docs').Options} */
         ({
-          id: 'reference',
-          path: 'reference',
-          routeBasePath: '/reference',
+          id: 'templates',
+          path: 'templates',
+          routeBasePath: '/templates',
           // `undefined` to auto-generate
           sidebarPath: undefined,
+          sidebarCollapsed: false,
+          sidebarCollapsible: false,
           ...commonDocsOptions,
         }),
       ],
-    ],
+      [
+        'content-docs',
+        /** @type {import('@docusaurus/plugin-content-docs').Options} */
+        ({
+          id: 'changelog',
+          path: 'changelog',
+          routeBasePath: '/changelog',
+          // `undefined` to auto-generate
+          sidebarPath: undefined,
+          sidebarCollapsed: false,
+          sidebarCollapsible: false,
+          ...commonDocsOptions,
+        }),
+      ],
+    ],    
 };
 
 module.exports = config;

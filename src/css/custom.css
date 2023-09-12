@@ -1,11 +1,16 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
 
-/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+@font-face {
+  font-family: 'Atyp';
+  src: url('/fonts/AtypDisplay-Bold.woff2') format('woff2'),
+       url('/fonts/AtypDisplay-Medium.woff2') format('woff2'),
+       url('/fonts/AtypDisplay-Regular.woff2') format('woff2'),
+       url('/fonts/AtypDisplay-Semibold.woff2') format('woff2');
+}
+
 :root {
+  --ifm-font-family-base: 'IBM Plex Sans', sans-serif;
   --ifm-color-primary: #000;
   --ifm-color-primary-dark: #000033;
   --ifm-color-primary-darker: #001ac9;
@@ -17,18 +22,22 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Atyp', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
   --ifm-color-primary: #fff;
   --ifm-color-primary-dark: #98beff;
-  --ifm-color-primary-darker: #0073ff;
+  --ifm-color-primary-darker: #52A9FF;
   --ifm-color-primary-darkest: #0048f8;
   --ifm-color-primary-light: #001ac9;
   --ifm-color-primary-lighter: #000033;
   --ifm-color-primary-lightest: #000;
   --ifm-menu-color-background-active: rgba(255, 255, 255, 0.1);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-navbar-background-color: #000;
+  --ifm-navbar-background-color: #151718;
   --ifm-menu-color: #888;
 }
 
@@ -50,7 +59,6 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  background: radial-gradient(circle at 10% 30%, rgb(34, 38, 46), rgba(255, 255, 255, 0) 18%), radial-gradient(circle at 90% 50%, rgb(34, 38, 46), rgba(255, 255, 255, 0) 26%);
   z-index: -1;
 }
 
@@ -59,13 +67,27 @@ html[data-theme='dark'] {
 }
 
 [data-theme='dark'] .footer {
-  background: transparent;
-  border-top: 1px solid var(--ifm-toc-border-color);
+  background: #151718;
+  border-top: 1px solid #313538;
 }
 
 .navbar {
-  border-bottom: 1px solid var(--ifm-toc-border-color);
+  border-bottom: 1px solid #313538;
   box-shadow: none;
+}
+
+.alert {
+  background: #1C1C1C;
+  border-left: 4px solid #fff;
+  border-radius: 6px;
+}
+
+.alert a {
+  text-decoration: none;
+}
+
+.alert a:hover {
+  text-decoration: underline;
 }
 
 .DocSearch-Modal .DocSearch-Footer,
@@ -77,14 +99,15 @@ html[data-theme='dark'] {
 }
 .navbar__items .DocSearch-Button {
   width: 250px;
-  border-radius: 5px;
-  border: 1px solid var(--ifm-toc-border-color);
+  border-radius: 6px;
+  border: 1px solid #313538;
   background: var(--docsearch-searchbox-focus-background);
+  color: #888;
 }
 .navbar__items .DocSearch-Button:hover {
   box-shadow: var(--ifm-toc-border-color);
   background: var(--docsearch-searchbox-focus-background);
-  border: 1px solid var(--ifm-color-primary);
+  border: 1px solid #697177;
 }
 
 .footer__bottom {
@@ -126,7 +149,7 @@ div[class*="docItemContainer"] {
     align-items: inherit;
   }
   .navbar__items .DocSearch-Button {
-    justify-content: center;
+    justify-content: flex-start;
   }
   [class^="sidebar_"] .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
     padding: 1rem 0;
@@ -156,7 +179,7 @@ div[class*="docItemContainer"] {
 }
 
 .menu .menu__list {
-  padding-right: 2rem;
+  padding: 0;
 }
 
 nav > .menu__list {
@@ -208,7 +231,7 @@ nav > .menu__list {
 .DocSearch-Container > .DocSearch-Modal,
 .DocSearch-Modal .DocSearch-Form {
   box-shadow: none;
-  border: 1px solid var(--ifm-toc-border-color);
+  border: 1px solid #313538;
 }
 
 .DocSearch-Modal .DocSearch-Input {
@@ -216,7 +239,7 @@ nav > .menu__list {
 }
 
 input[class^="searchQueryInput_"] {
-  border: 1px solid var(--ifm-toc-border-color);
+  border: 1px solid #313538;
   max-width: 480px;
   width: 100%;
 }
@@ -241,14 +264,14 @@ input[class^="searchQueryInput_"] {
 
 article h1,
 .col article header > h2 {
-  /* background: linear-gradient(90deg, rgb(0, 115, 255), rgb(0, 250, 255)); */
-  background: linear-gradient(90deg, #888, #fff);
+  background: #ffffff;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .pagination-nav__link {
-  background: var(--custom-color-gray-blue);
+  background-color: #151718;
+  border-radius: 6px;
 }
 
 .main-wrapper .container {
@@ -273,9 +296,7 @@ article h1,
   border-left-style: dashed;
 }
 
-.markdown img {
-  border-radius: 8px;
-}
+.markdown img
 
 .table-of-contents li a:hover {
   text-decoration: underline;
@@ -301,7 +322,7 @@ blockquote {
   padding: 20px;
   background: #112;
   margin: 40px 5px;
-  border-radius: 8px;
+  border-radius: 0px;
 }
 
 blockquote code {
@@ -319,7 +340,7 @@ blockquote:before {
   display: block;
   top: -5px;
   left: -5px;
-  border-radius: 8px;
+  border-radius: 0px;
   height: calc(100% + var(--margin)*2);
   width: calc(100% + var(--margin)*2);
   transform: translate(calc(0px - var(--margin)),calc(0px - var(--margin)));
@@ -359,7 +380,7 @@ blockquote:before {
   display: block;
   top: -5px;
   left: -5px;
-  border-radius: 8px;
+  border-radius: 0px;
   height: calc(100% + var(--margin)*2);
   width: calc(100% + var(--margin)*2);
   transform: translate(calc(0px - var(--margin)),calc(0px - var(--margin)));
@@ -385,7 +406,7 @@ blockquote:before {
   padding: 20px;
   background: #112;
   margin: 40px 5px;
-  border-radius: 8px;
+  border-radius: 0px;
   max-width: 420px;
   width: 100%;
 }
@@ -394,7 +415,6 @@ blockquote:before {
   flex-flow: column;
 }
 .author_card img {
-  border-radius: 50%;
   display: block;
   overflow: hidden;
   width: auto;
