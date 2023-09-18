@@ -1,10 +1,10 @@
 ---
 draft: false
-title: Gateways | Fleek Docs 
+title: Gateways 
 sidebarCollapsible: false
 sidebar_position: 2
 date: 2023-01-10T09:00:00.000+00:00
-description: Dive into storage private gateways with Fleek. Understand their functioning, set up custom domains, and manage content delivery seamlessly..
+description: Dive into storage private gateways with Fleek. Understand their functioning, set up custom domains, and manage content delivery seamlessly.
 category: Documentation
 keywords: [services, documentation, getting started]
 tags:

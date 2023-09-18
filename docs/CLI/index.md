@@ -1,6 +1,6 @@
 ---
 draft: false
-title: Fleek CLI | Fleek Docs 
+title: Fleek CLI 
 sidebarCollapsible: false
 sidebar_position: 8
 date: 2023-01-10T09:00:00.000+00:00
@@ -66,7 +66,7 @@ $ fleek logout
 
 ### Projects
 
-As explained [here](https://docs.fleek.xyz/docs/Projects), to interact with services, you need to have a project. This can be created and managed via the CLI too!
+As explained [here](/docs/Projects), to interact with services, you need to have a project. This can be created and managed via the CLI too!
 
 To create a project, you can do it like this:
 
