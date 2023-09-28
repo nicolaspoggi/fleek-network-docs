@@ -15,6 +15,8 @@ tags:
 - Fleek
 ---
 
+![](../images/enssetup.png)
+
 ### Introduction
 
 [Ethereum Name Service Domains](https://ens.domains/es/) provide a decentralized alternative to DNS domains. These are Ethereum based names followed by the .eth TLD. One of its great features is its capability to map multiple records with multiple purposes.
@@ -70,3 +72,13 @@ ipfs://k51qzi5uqu5dj4m3cwuo6mezt5j3zdx6euck56nab99rt1onxo9y0nwbmcgoAA
 Once set, scroll down to confirm and validate the Ethereum transaction with your wallet. When the transaction is validated, your site will be set and ready on your ENS domain!
 
 To confirm, use the .limo gateway to access it as explained above.
+
+
+### Adding an ENS Subname
+
+Normally, trying to add an ENS subdomain or Subname of ENS V3 can trigger an errors due to controller settings in ENS. To ensure you can easily add any ENS subdomain to any Fleek site you want, go to the ENS app at https://app.ens.domains/yourname and:
+
+1. Visit the subnames tab, and select the subname you want to add to Fleek.
+2. Unwrap your subname.
+3. Set it as a primary name.
+4. Done! Go back to Fleek, and follow the normal ENS flow.
