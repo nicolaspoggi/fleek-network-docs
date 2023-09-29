@@ -8,14 +8,14 @@ description: Dive into Fleek's decentralized storage service. Offering support f
 category: Documentation
 keywords: [services, documentation, getting started]
 tags:
-- Edge Platform
-- CDN
-- Guide
-- Learn
-- Fleek
+  - Edge Platform
+  - CDN
+  - Guide
+  - Learn
+  - Fleek
 ---
 
-![](../images/Storage.png)
+![](../images/storage-ui.png)
 
 ### Introduction
 
@@ -29,15 +29,13 @@ To guarantee the best performance and availability we use a combination of these
 
 Storage is a service unique for every project. This means that you can have different storage configurations for each project you have in Fleek.
 
-![](../images/store.png)
-
 ### Add a File or Directory
 
 To add a file to your storage you first need to navigate to the `Files` section in your project dashboard and click on the `Upload File` button. This will open a modal where you can select one or multiple files to upload.
 
 This will be uploaded to IPFS and in the background it will be uploading to Filecoin and/or Arweave depending on your configuration.
 
-To add a directory simply select  the `Upload Directory` button and select the directory you want to upload.
+To add a directory simply select the `Upload Directory` button and select the directory you want to upload.
 
 ### Accessing a file or directory
 
@@ -48,7 +46,6 @@ To do this you can follow the steps in the [Gateways](/docs/Gateways) section.
 ### Deleting a file or directory
 
 To delete a file or directory you can click on the three dots icon in the file or directory row and select the `Delete` option. This will remove the file or directory from your storage. This action is irreversible.
-
 
 ### Content Addressing
 

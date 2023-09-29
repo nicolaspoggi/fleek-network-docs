@@ -14,8 +14,6 @@ tags:
 - Fleek
 ---
 
-![](../images/cli.png)
-
 In this guide, you will find all the information on how to set up and start interacting with Fleek's Command Line Interface (CLI).
 
 :::info
